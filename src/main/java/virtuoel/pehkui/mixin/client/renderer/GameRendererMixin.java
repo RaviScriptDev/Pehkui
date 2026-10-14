@@ -37,6 +37,11 @@ public class GameRendererMixin {
 		pehkui$isBobbing = false;
 	}
 
+	@ModifyVariable(method = "bobView", at = @At("STORE"), name = "backwardsInterpolatedWalkDistance")
+	private float pehkui$bobView$distance(float value){
+		return value / ScaleUtils.getViewBobbingScale(minecraft.getCameraEntity(), ScaleRenderUtils.getTickDelta(minecraft));
+	}
+
 	@WrapOperation(method = "bobView", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V"))
 	private void pehkui$bobView$translate(PoseStack obj, float x, float y, float z, Operation<Void> original) {
 		if (pehkui$isBobbing) {
@@ -50,13 +55,6 @@ public class GameRendererMixin {
 		}
 
 		original.call(obj, x, y, z);
-	}
-
-	@ModifyVariable(
-		method = "bobView",
-		at = @At(value = "STORE"), name = "bob")
-	private float pehkui$bobView$strength(float value) {
-		return value / ScaleUtils.getViewBobbingScale(minecraft.getCameraEntity());
 	}
 
 	@ModifyExpressionValue(method = "bobView", at = @At(value = "CONSTANT", args = "floatValue=0.5F"))
