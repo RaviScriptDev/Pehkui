@@ -1,5 +1,6 @@
 package virtuoel.pehkui.mixin.world.entity;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -245,5 +246,12 @@ public abstract class LivingEntityMixin extends EntityMixin {
 			original.hitboxMargin(),
 			original.mobFactor()
 		);
+	}
+	@ModifyExpressionValue(method = "tick", at= @At(value = "CONSTANT", args = "floatValue=0.0025000002F"))
+	private float pehkui$sideDist(float value){
+		LivingEntity self = (LivingEntity) (Object) this;
+		float scale = ScaleUtils.getMotionScale(self);
+		return value * scale * scale;
+
 	}
 }
