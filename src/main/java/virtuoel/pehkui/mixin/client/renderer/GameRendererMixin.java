@@ -56,9 +56,4 @@ public class GameRendererMixin {
 
 		original.call(obj, x, y, z);
 	}
-
-	@ModifyExpressionValue(method = "bobView", at = @At(value = "CONSTANT", args = "floatValue=0.5F"))
-	private float pehkui$getBasicProjectionMatrix$depth(float value) {
-		return ScaleRenderUtils.modifyProjectionMatrixDepth(value, minecraft.getCameraEntity(), ScaleRenderUtils.getTickDelta(Minecraft.getInstance()));
-	}
 }

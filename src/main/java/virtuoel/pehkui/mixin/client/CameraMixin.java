@@ -1,6 +1,8 @@
 package virtuoel.pehkui.mixin.client;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -16,6 +18,11 @@ import virtuoel.pehkui.util.ScaleUtils;
 public abstract class CameraMixin
 {
 	@Shadow Entity entity;
+
+	@Shadow
+	@Final
+	@Mutable
+	private Minecraft minecraft;
 	
 	@ModifyVariable(method = "getMaxZoom", at = @At(value = "HEAD"), argsOnly = true)
 	private float pehkui$clipToSpace(float desiredCameraDistance)
@@ -29,5 +36,9 @@ public abstract class CameraMixin
 		final float scale = ScaleUtils.getBoundingBoxWidthScale(entity);
 		
 		return scale < 1.0F ? scale * value : value;
+	}
+	@ModifyExpressionValue(method = "update", at = @At(value = "CONSTANT", args = "floatValue=0.05F"))
+	private float pehkui$getBasicProjectionMatrix$depth(float value) {
+		return ScaleRenderUtils.modifyProjectionMatrixDepth(value, minecraft.getCameraEntity(), ScaleRenderUtils.getTickDelta(Minecraft.getInstance()));
 	}
 }
