@@ -1,6 +1,7 @@
 package virtuoel.pehkui.mixin.server.level;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,8 +20,8 @@ public abstract class ServerPlayerMixin {
 		ScaleUtils.loadScaleOnRespawn((ServerPlayer) (Object) this, oldPlayer, alive);
 	}
 
-	@Inject(at = @At("RETURN"), method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;")
-	private void pehkui$dropItem(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
+	@Inject(at = @At("RETURN"), method = "drop(Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/util/Prediction;)Lnet/minecraft/world/entity/item/ItemEntity;")
+	private void pehkui$dropItem(ItemStack itemStack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir) {
 		final ItemEntity entity = cir.getReturnValue();
 
 		if (entity != null) {

@@ -29,7 +29,7 @@ public class ServerGamePacketListenerImplMixin {
 		return scale != 1.0F ? movement.scale(1.0F / scale) : movement;
 	}
 
-	@ModifyArg(method = "handleMovePlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"))
+	@ModifyArg(method = "handlePlayerPositionChange", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"))
 	private Vec3 pehkui$onPlayerMove$move(MoverType moverType, Vec3 movement) {
 		final float scale = ScaleUtils.getMotionScale(player);
 		return scale != 1.0F ? movement.scale(1.0F / scale) : movement;

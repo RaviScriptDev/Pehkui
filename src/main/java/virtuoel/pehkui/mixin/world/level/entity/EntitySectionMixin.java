@@ -13,7 +13,7 @@ import virtuoel.pehkui.util.ScaleUtils;
 
 @Mixin(EntitySection.class)
 public class EntitySectionMixin {
-	@WrapOperation(method = "getEntities(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/util/AbortableIterationConsumer;)Lnet/minecraft/util/AbortableIterationConsumer$Continuation;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/entity/EntityAccess;getBoundingBox()Lnet/minecraft/world/phys/AABB;"))
+	@WrapOperation(method = "getEntities(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/util/AbortableIterationConsumer;)Lnet/minecraft/util/Continuation;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/entity/EntityAccess;getBoundingBox()Lnet/minecraft/world/phys/AABB;"))
 	private AABB pehkui$forEach$getBoundingBox(EntityAccess obj, Operation<AABB> original) {
 		final AABB bounds = original.call(obj);
 
@@ -34,7 +34,7 @@ public class EntitySectionMixin {
 		return bounds;
 	}
 
-	@WrapOperation(method = "getEntities(Lnet/minecraft/world/level/entity/EntityTypeTest;Lnet/minecraft/world/phys/AABB;Lnet/minecraft/util/AbortableIterationConsumer;)Lnet/minecraft/util/AbortableIterationConsumer$Continuation;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/entity/EntityAccess;getBoundingBox()Lnet/minecraft/world/phys/AABB;"))
+	@WrapOperation(method = "getEntities(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/util/AbortableIterationConsumer;)Lnet/minecraft/util/Continuation;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/entity/EntityAccess;getBoundingBox()Lnet/minecraft/world/phys/AABB;"))
 	private AABB pehkui$forEach$getBoundingBox$filtered(EntityAccess obj, Operation<AABB> original) {
 		final AABB bounds = original.call(obj);
 

@@ -11,11 +11,12 @@ import virtuoel.pehkui.util.ScaleUtils;
 @Mixin(ScreenEffectRenderer.class)
 public abstract class ScreenEffectRendererMixin
 {
-	@ModifyExpressionValue(method = "getViewBlockingState", remap = false, at = @At(value = "CONSTANT", args = "floatValue=0.1F"))
-	private static float pehkui$getInWallBlockState$offset(float value, Player player)
-	{
-		final float scale = ScaleUtils.getEyeHeightScale(player);
-		
-		return scale != 1.0F ? value * scale : value;
-	}
+	//todo: the same as the other screeneffectrenderermixin
+//	@ModifyExpressionValue(method = "getViewBlockingState", remap = false, at = @At(value = "CONSTANT", args = "floatValue=0.1F"))
+//	private static float pehkui$getInWallBlockState$offset(float value, Player player)
+//	{
+//		final float scale = ScaleUtils.getEyeHeightScale(player);
+//
+//		return scale != 1.0F ? value * scale : value;
+//	}
 }
